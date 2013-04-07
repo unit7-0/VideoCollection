@@ -43,6 +43,7 @@ public class UserTable extends EntityTable<Users> {
             model.setValueAt(user.getStreet().getName(), i, 2);
             model.setValueAt(user.getHouse(), i, 3);
             model.setValueAt(user.getPhone(), i, 4);
+            i += 1;
         }
         
         setModel(model);

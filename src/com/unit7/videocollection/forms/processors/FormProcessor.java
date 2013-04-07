@@ -8,6 +8,8 @@ import com.unit7.videocollection.entities.Director;
 import com.unit7.videocollection.entities.Genre;
 import com.unit7.videocollection.entities.Street;
 import com.unit7.videocollection.entities.Studio;
+import com.unit7.videocollection.entities.Users;
+import com.unit7.videocollection.forms.DebtorMessageAddForm;
 import com.unit7.videocollection.forms.FilmAddForm;
 import com.unit7.videocollection.forms.UserAddForm;
 import com.unit7.videocollection.utils.GetStatusForm;
@@ -115,6 +117,31 @@ public class FormProcessor {
                 street = (Street) ans[0];
             
             result[4] = street;
+            
+            return result;
+        }
+        
+        return null;
+    }
+    
+    public static Object[] getInfo(DebtorMessageAddForm form) {
+        int status = GetStatusForm.WAITING;
+        while (status == GetStatusForm.WAITING) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FilmAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            status = form.getStatus();
+        }
+        
+        if (status == GetStatusForm.OK) {            
+            Object[] result = new Object[3];
+            
+            result[0] = HibernateUtil.getEntityFromTable(Users.class, "id", form.getUser());
+            result[1] = form.getDate();
+            result[2] = form.getDescription();
             
             return result;
         }

@@ -40,6 +40,7 @@ public class MessageTable extends EntityTable<Message> {
                              message.getMessUser().getLastName(), i, 0);
             model.setValueAt(message.getMessDate(), i, 1);
             model.setValueAt(message.getDescription(), i, 2);
+            i += 1;
         }
         
         setModel(model);

@@ -4,6 +4,7 @@
 
 package com.unit7.videocollection;
 
+import com.unit7.videocollection.forms.DebtorListForm;
 import com.unit7.videocollection.forms.FilmListForm;
 import com.unit7.videocollection.forms.MessageListForm;
 import com.unit7.videocollection.forms.UserListForm;
@@ -34,6 +35,7 @@ public class VideoCollectionView extends FrameView {
         filmsButton = new javax.swing.JButton();
         usersButton = new javax.swing.JButton();
         messagesButton = new javax.swing.JButton();
+        debtorButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -71,16 +73,25 @@ public class VideoCollectionView extends FrameView {
             }
         });
 
+        debtorButton.setText(resourceMap.getString("debtorButton.text")); // NOI18N
+        debtorButton.setName("debtorButton"); // NOI18N
+        debtorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                debtorButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainControlLayout = new javax.swing.GroupLayout(mainControl);
         mainControl.setLayout(mainControlLayout);
         mainControlLayout.setHorizontalGroup(
             mainControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainControlLayout.createSequentialGroup()
                 .addContainerGap(139, Short.MAX_VALUE)
-                .addGroup(mainControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(messagesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usersButton)
-                    .addComponent(filmsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(mainControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(messagesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(filmsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(debtorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(124, 124, 124))
         );
         mainControlLayout.setVerticalGroup(
@@ -92,7 +103,9 @@ public class VideoCollectionView extends FrameView {
                 .addComponent(usersButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(messagesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(debtorButton)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -144,7 +157,12 @@ private void messagesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     MessageListForm.main(null);
 }//GEN-LAST:event_messagesButtonActionPerformed
 
+private void debtorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debtorButtonActionPerformed
+    DebtorListForm.main(null);
+}//GEN-LAST:event_debtorButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton debtorButton;
     private javax.swing.JButton filmsButton;
     private javax.swing.JPanel mainControl;
     private javax.swing.JPanel mainPanel;

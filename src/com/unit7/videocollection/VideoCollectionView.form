@@ -43,10 +43,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="139" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="messagesButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="usersButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="filmsButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="messagesButton" alignment="0" max="32767" attributes="1"/>
+                          <Component id="usersButton" alignment="0" max="32767" attributes="1"/>
+                          <Component id="filmsButton" alignment="0" max="32767" attributes="1"/>
+                          <Component id="debtorButton" alignment="0" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                   </Group>
@@ -61,7 +62,9 @@
                       <Component id="usersButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="messagesButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="152" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="debtorButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="123" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -98,6 +101,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="messagesButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="debtorButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="debtorButton.text"/>
+                <Property name="name" type="java.lang.String" value="debtorButton" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="debtorButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

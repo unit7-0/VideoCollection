@@ -121,7 +121,7 @@ private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_refreshActionPerformed
 
 private void newMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMessageActionPerformed
-    MessageAddForm.main(null);
+
 }//GEN-LAST:event_newMessageActionPerformed
 
     /**

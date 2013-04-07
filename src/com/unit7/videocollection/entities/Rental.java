@@ -30,15 +30,18 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Rental.findById", query = "SELECT r FROM Rental r WHERE r.id = :id"),
     @NamedQuery(name = "Rental.findByRentDate", query = "SELECT r FROM Rental r WHERE r.rentDate = :rentDate")})
 public class Rental implements Serializable {
+    @Column(name = "RENT_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date rentDate;
+    @Column(name = "TARGET_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date targetDate;
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
     private BigDecimal id;
-    @Column(name = "RENT_DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date rentDate;
     @JoinColumn(name = "RENT_USER", referencedColumnName = "ID")
     @ManyToOne
     private Users rentUser;
@@ -108,6 +111,14 @@ public class Rental implements Serializable {
     @Override
     public String toString() {
         return "com.unit7.videocollection.entities.Rental[ id=" + id + " ]";
+    }
+
+    public Date getTargetDate() {
+        return targetDate;
+    }
+
+    public void setTargetDate(Date targetDate) {
+        this.targetDate = targetDate;
     }
     
 }

@@ -4,31 +4,32 @@
  */
 
 /*
- * UserListFOrm.java
+ * DebtoListForm.java
  *
- * Created on Apr 7, 2013, 1:00:37 PM
+ * Created on Apr 7, 2013, 5:06:54 PM
  */
 package com.unit7.videocollection.forms;
 
-import com.unit7.videocollection.entities.Street;
+import com.unit7.videocollection.entities.Message;
 import com.unit7.videocollection.entities.Users;
 import com.unit7.videocollection.forms.processors.FormProcessor;
 import com.unit7.videocollection.utils.HibernateUtil;
-import com.unit7.videocollection.utils.impl.UserFieldGetterImpl;
-import com.unit7.videocollection.utils.impl.UserFieldSetterImpl;
-import java.math.BigInteger;
+import com.unit7.videocollection.utils.impl.MessageFieldGetterImpl;
+import com.unit7.videocollection.utils.impl.MessageFieldSetterImpl;
+import java.util.Date;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author unit7
  */
-public class UserListForm extends javax.swing.JFrame {
+public class DebtorListForm extends javax.swing.JFrame {
 
-    /** Creates new form UserListFOrm */
-    public UserListForm() {
+    /** Creates new form DebtoListForm */
+    public DebtorListForm() {
         initComponents();
-        userTable1.refresh();
+        debtorTable1.refresh();
     }
 
     /** This method is called from within the constructor to
@@ -42,9 +43,9 @@ public class UserListForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        userTable1 = new com.unit7.videocollection.utils.components.UserTable();
-        newUserButton = new javax.swing.JButton();
-        refreshButton = new javax.swing.JButton();
+        debtorTable1 = new com.unit7.videocollection.utils.components.DebtorTable();
+        sendMessage = new javax.swing.JButton();
+        refresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -54,7 +55,7 @@ public class UserListForm extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        userTable1.setModel(new javax.swing.table.DefaultTableModel(
+        debtorTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -65,34 +66,34 @@ public class UserListForm extends javax.swing.JFrame {
 
             }
         ));
-        userTable1.setName("userTable1"); // NOI18N
-        jScrollPane1.setViewportView(userTable1);
+        debtorTable1.setName("debtorTable1"); // NOI18N
+        jScrollPane1.setViewportView(debtorTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(UserListForm.class);
-        newUserButton.setText(resourceMap.getString("newUserButton.text")); // NOI18N
-        newUserButton.setName("newUserButton"); // NOI18N
-        newUserButton.addActionListener(new java.awt.event.ActionListener() {
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(DebtorListForm.class);
+        sendMessage.setText(resourceMap.getString("sendMessage.text")); // NOI18N
+        sendMessage.setName("sendMessage"); // NOI18N
+        sendMessage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newUserButtonActionPerformed(evt);
+                sendMessageActionPerformed(evt);
             }
         });
 
-        refreshButton.setText(resourceMap.getString("refreshButton.text")); // NOI18N
-        refreshButton.setName("refreshButton"); // NOI18N
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+        refresh.setText(resourceMap.getString("refresh.text")); // NOI18N
+        refresh.setName("refresh"); // NOI18N
+        refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
+                refreshActionPerformed(evt);
             }
         });
 
@@ -100,62 +101,65 @@ public class UserListForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(newUserButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refreshButton)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(sendMessage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(refresh)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newUserButton)
-                    .addComponent(refreshButton))
+                    .addComponent(sendMessage)
+                    .addComponent(refresh))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-    userTable1.refresh();
-}//GEN-LAST:event_refreshButtonActionPerformed
+private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+    debtorTable1.refresh();
+}//GEN-LAST:event_refreshActionPerformed
 
-private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserButtonActionPerformed
+private void sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageActionPerformed
     SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                final UserAddForm form = new UserAddForm();
-                form.setVisible(true);
-                
-                new Thread(new Runnable() {
+        @Override
+        public void run() {
+            if (debtorTable1.getSelectedRows().length != 1)
+                return;
+
+            int selectedRow = debtorTable1.getSelectedRow();
+            TableModel model = debtorTable1.getModel();
+            final DebtorMessageAddForm form = new DebtorMessageAddForm(new Object[] { model.getValueAt(selectedRow, 0),
+                                                     model.getValueAt(selectedRow, 1),
+                                                     model.getValueAt(selectedRow, 2) });
+            form.setVisible(true);
+            
+            new Thread(new Runnable() {
                     @Override
                     public void run() {
                         Object[] info = FormProcessor.getInfo(form);
                         
-                        Users user = new Users();
+                        Message message = new Message();
+                        message.setMessUser((Users) info[0]);
+                        message.setMessDate((Date) info[1]);
+                        message.setDescription((String) info[2]);
                         
-                        user.setFirstName((String) info[0]);
-                        user.setLastName((String) info[1]);
-                        user.setPhone((String) info[2]);
-                        user.setHouse((BigInteger) info[3]);
-                        user.setStreet((Street) info[4]);
-                        
-                        HibernateUtil.insertEntity(user, new UserFieldSetterImpl(), new UserFieldGetterImpl());
+                        HibernateUtil.insertEntity(message, new MessageFieldSetterImpl(), new MessageFieldGetterImpl());
                     }
                 }).start();
-            }
-        });
-}//GEN-LAST:event_newUserButtonActionPerformed
+        }
+    });
+}//GEN-LAST:event_sendMessageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,13 +178,13 @@ private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DebtorListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DebtorListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DebtorListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DebtorListForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -188,15 +192,15 @@ private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new UserListForm().setVisible(true);
+                new DebtorListForm().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.unit7.videocollection.utils.components.DebtorTable debtorTable1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton newUserButton;
-    private javax.swing.JButton refreshButton;
-    private com.unit7.videocollection.utils.components.UserTable userTable1;
+    private javax.swing.JButton refresh;
+    private javax.swing.JButton sendMessage;
     // End of variables declaration//GEN-END:variables
 }

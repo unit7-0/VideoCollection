@@ -338,7 +338,7 @@ public class FilmAddForm extends javax.swing.JFrame implements GetStatusForm {
                 .addComponent(ok)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Cancel)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
             .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(

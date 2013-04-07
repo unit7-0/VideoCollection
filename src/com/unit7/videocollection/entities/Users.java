@@ -4,6 +4,8 @@
  */
 package com.unit7.videocollection.entities;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -19,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -34,6 +37,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Users.findByHouse", query = "SELECT u FROM Users u WHERE u.house = :house"),
     @NamedQuery(name = "Users.findByPhone", query = "SELECT u FROM Users u WHERE u.phone = :phone")})
 public class Users implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "messUser")
     private Collection<Message> messageCollection;
     @OneToMany(mappedBy = "rentUser")
@@ -76,7 +81,9 @@ public class Users implements Serializable {
     }
 
     public void setId(BigDecimal id) {
+        BigDecimal oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getFirstName() {
@@ -84,7 +91,9 @@ public class Users implements Serializable {
     }
 
     public void setFirstName(String firstName) {
+        String oldFirstName = this.firstName;
         this.firstName = firstName;
+        changeSupport.firePropertyChange("firstName", oldFirstName, firstName);
     }
 
     public String getLastName() {
@@ -92,7 +101,9 @@ public class Users implements Serializable {
     }
 
     public void setLastName(String lastName) {
+        String oldLastName = this.lastName;
         this.lastName = lastName;
+        changeSupport.firePropertyChange("lastName", oldLastName, lastName);
     }
 
     public BigInteger getHouse() {
@@ -100,7 +111,9 @@ public class Users implements Serializable {
     }
 
     public void setHouse(BigInteger house) {
+        BigInteger oldHouse = this.house;
         this.house = house;
+        changeSupport.firePropertyChange("house", oldHouse, house);
     }
 
     public String getPhone() {
@@ -108,7 +121,9 @@ public class Users implements Serializable {
     }
 
     public void setPhone(String phone) {
+        String oldPhone = this.phone;
         this.phone = phone;
+        changeSupport.firePropertyChange("phone", oldPhone, phone);
     }
 
     public Street getStreet() {
@@ -116,7 +131,9 @@ public class Users implements Serializable {
     }
 
     public void setStreet(Street street) {
+        Street oldStreet = this.street;
         this.street = street;
+        changeSupport.firePropertyChange("street", oldStreet, street);
     }
 
     @Override
@@ -158,6 +175,14 @@ public class Users implements Serializable {
 
     public void setRentalCollection(Collection<Rental> rentalCollection) {
         this.rentalCollection = rentalCollection;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

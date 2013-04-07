@@ -121,7 +121,7 @@
                   <Component id="ok" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="Cancel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="246" max="32767" attributes="0"/>
+                  <EmptySpace pref="238" max="32767" attributes="0"/>
               </Group>
               <Component id="jPanel7" alignment="1" max="32767" attributes="0"/>
           </Group>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+        
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
+        <property name="connection.user">unit7_ovp</property>
+        <property name="connection.password">123456</property>
+		<property name="hibernate.default_schema">unit7_ovp</property>
+        <property name="connection.pool_size">1</property>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+
+        <property name="current_session_context_class">thread</property>
+
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        
+        <mapping class="com.unit7.videocollection.entities.Film" />
+        <mapping class="com.unit7.videocollection.entities.Genre" />
+        <mapping class="com.unit7.videocollection.entities.Director" />
+        <mapping class="com.unit7.videocollection.entities.Studio" />
+        <mapping class="com.unit7.videocollection.entities.Users" />
+        <mapping class="com.unit7.videocollection.entities.Street" />
+        <mapping class="com.unit7.videocollection.entities.Rental" />
+        <mapping class="com.unit7.videocollection.entities.Message" />
+    </session-factory>
+</hibernate-configuration>

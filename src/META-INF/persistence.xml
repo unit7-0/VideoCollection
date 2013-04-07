@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="VideoCollectionPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.unit7.videocollection.entities.Genre</class>
+    <class>com.unit7.videocollection.entities.Director</class>
+    <class>com.unit7.videocollection.entities.Film</class>
+    <class>com.unit7.videocollection.entities.Studio</class>
+    <class>com.unit7.videocollection.entities.Users</class>
+    <class>com.unit7.videocollection.entities.Street</class>
+    <class>com.unit7.videocollection.entities.Rental</class>
+    <class>com.unit7.videocollection.entities.Message</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.user" value="unit7_ovp"/>
+    </properties>
+  </persistence-unit>
+</persistence>

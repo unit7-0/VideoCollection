@@ -54,6 +54,8 @@ public class FilmListForm extends javax.swing.JFrame {
         refreshTable = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(FilmListForm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -75,7 +77,6 @@ public class FilmListForm extends javax.swing.JFrame {
         filmTable1.setName("filmTable1"); // NOI18N
         jScrollPane1.setViewportView(filmTable1);
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(FilmListForm.class);
         addFilm.setText(resourceMap.getString("addFilm.text")); // NOI18N
         addFilm.setName("addFilm"); // NOI18N
         addFilm.addActionListener(new java.awt.event.ActionListener() {

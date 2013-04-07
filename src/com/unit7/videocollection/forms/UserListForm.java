@@ -10,14 +10,19 @@
  */
 package com.unit7.videocollection.forms;
 
+import com.unit7.videocollection.entities.Message;
 import com.unit7.videocollection.entities.Street;
 import com.unit7.videocollection.entities.Users;
 import com.unit7.videocollection.forms.processors.FormProcessor;
 import com.unit7.videocollection.utils.HibernateUtil;
+import com.unit7.videocollection.utils.impl.MessageFieldGetterImpl;
+import com.unit7.videocollection.utils.impl.MessageFieldSetterImpl;
 import com.unit7.videocollection.utils.impl.UserFieldGetterImpl;
 import com.unit7.videocollection.utils.impl.UserFieldSetterImpl;
 import java.math.BigInteger;
+import java.util.Date;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -45,8 +50,11 @@ public class UserListForm extends javax.swing.JFrame {
         userTable1 = new com.unit7.videocollection.utils.components.UserTable();
         newUserButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
+        sendMessage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(UserListForm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -79,7 +87,6 @@ public class UserListForm extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(UserListForm.class);
         newUserButton.setText(resourceMap.getString("newUserButton.text")); // NOI18N
         newUserButton.setName("newUserButton"); // NOI18N
         newUserButton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +103,14 @@ public class UserListForm extends javax.swing.JFrame {
             }
         });
 
+        sendMessage.setText(resourceMap.getString("sendMessage.text")); // NOI18N
+        sendMessage.setName("sendMessage"); // NOI18N
+        sendMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendMessageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +124,9 @@ public class UserListForm extends javax.swing.JFrame {
                 .addComponent(newUserButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshButton)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sendMessage)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +136,8 @@ public class UserListForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newUserButton)
-                    .addComponent(refreshButton))
+                    .addComponent(refreshButton)
+                    .addComponent(sendMessage))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,6 +174,36 @@ private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             }
         });
 }//GEN-LAST:event_newUserButtonActionPerformed
+
+private void sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageActionPerformed
+    SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (userTable1.getSelectedRows().length != 1)
+                    return;
+
+                int selectedRow = userTable1.getSelectedRow();
+                TableModel model = userTable1.getModel();
+                final UserMessageAddForm form = new UserMessageAddForm(
+                        new Object[] { model.getValueAt(selectedRow, 0) });
+                form.setVisible(true);
+
+                new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Object[] info = FormProcessor.getInfo(form);
+
+                            Message message = new Message();
+                            message.setMessUser((Users) info[0]);
+                            message.setMessDate((Date) info[1]);
+                            message.setDescription((String) info[2]);
+
+                            HibernateUtil.insertEntity(message, new MessageFieldSetterImpl(), new MessageFieldGetterImpl());
+                        }
+                    }).start();
+            }
+    });
+}//GEN-LAST:event_sendMessageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +245,7 @@ private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton newUserButton;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JButton sendMessage;
     private com.unit7.videocollection.utils.components.UserTable userTable1;
     // End of variables declaration//GEN-END:variables
 }

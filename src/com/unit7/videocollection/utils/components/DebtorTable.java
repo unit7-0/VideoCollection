@@ -28,7 +28,7 @@ public class DebtorTable extends EntityTable<Rental> {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("User");
         model.addColumn("Film");
-        model.addColumn("Data");
+        model.addColumn("Date");
         setModel(model);
     }
     

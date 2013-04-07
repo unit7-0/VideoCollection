@@ -34,10 +34,11 @@ public class MessageListForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         messageTable1 = new com.unit7.videocollection.utils.components.MessageTable();
-        newMessage = new javax.swing.JButton();
         refresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(MessageListForm.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -70,15 +71,6 @@ public class MessageListForm extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(MessageListForm.class);
-        newMessage.setText(resourceMap.getString("newMessage.text")); // NOI18N
-        newMessage.setName("newMessage"); // NOI18N
-        newMessage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newMessageActionPerformed(evt);
-            }
-        });
-
         refresh.setText(resourceMap.getString("refresh.text")); // NOI18N
         refresh.setName("refresh"); // NOI18N
         refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -95,10 +87,7 @@ public class MessageListForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(newMessage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(refresh)))
+                    .addComponent(refresh))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,9 +96,7 @@ public class MessageListForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newMessage)
-                    .addComponent(refresh))
+                .addComponent(refresh)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -119,10 +106,6 @@ public class MessageListForm extends javax.swing.JFrame {
 private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
     messageTable1.refresh();
 }//GEN-LAST:event_refreshActionPerformed
-
-private void newMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMessageActionPerformed
-
-}//GEN-LAST:event_newMessageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,7 +146,6 @@ private void newMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.unit7.videocollection.utils.components.MessageTable messageTable1;
-    private javax.swing.JButton newMessage;
     private javax.swing.JButton refresh;
     // End of variables declaration//GEN-END:variables
 }

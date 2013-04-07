@@ -19,10 +19,10 @@ import java.util.Date;
  *
  * @author unit7
  */
-public class DebtorMessageAddForm extends javax.swing.JFrame implements GetStatusForm {
+public class UserMessageAddForm extends javax.swing.JFrame implements GetStatusForm {
 
     /** Creates new form DebtorMessageAddForm */
-    public DebtorMessageAddForm(Object[] args) {
+    public UserMessageAddForm(Object[] args) {
         initComponents();
         
         user = (ObjectWrapper) args[0];
@@ -32,13 +32,14 @@ public class DebtorMessageAddForm extends javax.swing.JFrame implements GetStatu
         currentDate.setText(calendar.getTime().toString());
         date = calendar.getTime();
         
-        calendar.setTime(new Date(calendar.getTime().getTime() + 24 * 60 * 60 * 1000));
-        
-        String template = "Уважаемый " + args[0] + "!\n\n" +
-                          "Убедительно прошу Вас вернуть фильм " +
-                          "«" + args[1] + "»,\nкоторый Вы взяли " +
-                          args[2] + " до " + calendar.getTime().toString() + 
+        String template = "Уважаемый " + args[0] +
+                          "\n\nУбедительно прошу Вас" +
+                          " сообщить будете ли Вы и впредь\n" +
+                          " пользоваться услугами нашей видеотеки," + 
+                          " поскольку Вы уже давно не посещали нас."+
+                          "" +
                           "\n\nЗаранее спасибо.";
+
         textMessage.setText(template);
         toUserLabel.setText(args[0].toString());
     }
@@ -63,7 +64,7 @@ public class DebtorMessageAddForm extends javax.swing.JFrame implements GetStatu
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(DebtorMessageAddForm.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.unit7.videocollection.VideoCollectionApp.class).getContext().getResourceMap(UserMessageAddForm.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
@@ -207,13 +208,13 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DebtorMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DebtorMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DebtorMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DebtorMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserMessageAddForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -221,7 +222,7 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new DebtorMessageAddForm(args).setVisible(true);
+                new UserMessageAddForm(args).setVisible(true);
             }
         });
     }

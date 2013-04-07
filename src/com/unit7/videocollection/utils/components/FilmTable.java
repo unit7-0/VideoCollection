@@ -4,15 +4,11 @@
  */
 package com.unit7.videocollection.utils.components;
 
-import com.unit7.videocollection.utils.HibernateUtil;
 import com.unit7.videocollection.entities.Film;
 import com.unit7.videocollection.entities.Director;
 import com.unit7.videocollection.entities.Genre;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *

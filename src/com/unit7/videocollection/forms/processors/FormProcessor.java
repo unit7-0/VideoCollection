@@ -12,6 +12,7 @@ import com.unit7.videocollection.entities.Users;
 import com.unit7.videocollection.forms.DebtorMessageAddForm;
 import com.unit7.videocollection.forms.FilmAddForm;
 import com.unit7.videocollection.forms.UserAddForm;
+import com.unit7.videocollection.forms.UserMessageAddForm;
 import com.unit7.videocollection.utils.GetStatusForm;
 import com.unit7.videocollection.utils.HibernateUtil;
 import com.unit7.videocollection.utils.impl.DirectorFieldGetterImpl;
@@ -125,6 +126,31 @@ public class FormProcessor {
     }
     
     public static Object[] getInfo(DebtorMessageAddForm form) {
+        int status = GetStatusForm.WAITING;
+        while (status == GetStatusForm.WAITING) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FilmAddForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            status = form.getStatus();
+        }
+        
+        if (status == GetStatusForm.OK) {            
+            Object[] result = new Object[3];
+            
+            result[0] = HibernateUtil.getEntityFromTable(Users.class, "id", form.getUser());
+            result[1] = form.getDate();
+            result[2] = form.getDescription();
+            
+            return result;
+        }
+        
+        return null;
+    }
+    
+    public static Object[] getInfo(UserMessageAddForm form) {
         int status = GetStatusForm.WAITING;
         while (status == GetStatusForm.WAITING) {
             try {

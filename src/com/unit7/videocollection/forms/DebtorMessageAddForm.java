@@ -12,6 +12,7 @@ package com.unit7.videocollection.forms;
 
 import com.unit7.videocollection.utils.GetStatusForm;
 import com.unit7.videocollection.utils.components.ObjectWrapper;
+import java.awt.Font;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,6 +41,7 @@ public class DebtorMessageAddForm extends javax.swing.JFrame implements GetStatu
                           args[2] + " до " + calendar.getTime().toString() + 
                           "\n\nЗаранее спасибо.";
         textMessage.setText(template);
+        textMessage.setFont(new Font("Serif", Font.ITALIC, 12));
         toUserLabel.setText(args[0].toString());
     }
 
